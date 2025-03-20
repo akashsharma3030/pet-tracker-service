@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class DogTrackerController {
                     content = @Content(schema = @Schema(implementation = TrackerErrorResModel.class)))
     })
     @PostMapping("/dog/register")
-    public PetTrackerResponseModel registerDogTracker(final @RequestBody @Valid DogTrackerReqModel reqModel) throws DogTrackerException, DogTrackerInternalException {
+    public PetTrackerResponseModel registerDogTracker(@Valid @RequestBody DogTrackerReqModel reqModel) throws DogTrackerException, DogTrackerInternalException {
         DogTrackerModel dogTrackerModel = new DogTrackerModel(reqModel.getOwnerId(), reqModel.getDogTrackerType(),
                 true);
         logger.info("DogTrackerReqModel Validated successfully");

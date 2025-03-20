@@ -11,9 +11,9 @@ import lombok.Setter;
 public class DogTrackerReqModel {
 
     @NotNull(message = "Dog tracker type cannot be Null")
-    private final DogTrackerType dogTrackerType;
+    private DogTrackerType dogTrackerType;
 
     @NotNull(message = "Owner Id cannot be Null")
-    private final Integer ownerId;
+    private Integer ownerId;
 
 }

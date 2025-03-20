@@ -38,7 +38,7 @@ public class CatTrackerController {
                     content = @Content(schema = @Schema(implementation = TrackerErrorResModel.class)))
     })
     @PostMapping("/cat/register")
-    public PetTrackerResponseModel registerCatTracker(final @RequestBody @Valid CatTrackerReqModel reqModel) throws CatTrackerException, CatTrackerInternalException {
+    public PetTrackerResponseModel registerCatTracker( @Valid final @RequestBody CatTrackerReqModel reqModel) throws CatTrackerException, CatTrackerInternalException {
         CatTrackerModel catTrackerModel = new CatTrackerModel(reqModel.getOwnerId(), reqModel.getCatTrackerType(),
                 true, false);
         log.info("CatTrackerReqModel Validated successfully");
