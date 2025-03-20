@@ -84,7 +84,7 @@ class SearchTrackerServiceImplUT {
         // Given
         Long trackerId = 123L;
         PetTrackerResDto dto = new PetTrackerResDto(PetType.DOG.name(), TrackerType.BIG.name(),
-                true, 123, 12345L);
+                true, 123, "12345");
         TrackerModel expectedModel = new TrackerModel();
 
         when(searchTrackerDBService.searchTrackerById(trackerId)).thenReturn(dto);

@@ -43,7 +43,7 @@ class CatTrackerServiceImplTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals(expectedTrackerId, response.getTrackerId());
+        assertEquals(String.valueOf(expectedTrackerId), response.getTrackerId());
         assertEquals("Cat Tracker Registered Successfully", response.getMessage());
 
         // Verify interactions

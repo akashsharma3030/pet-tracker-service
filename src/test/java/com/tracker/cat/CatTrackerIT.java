@@ -88,7 +88,7 @@ public class CatTrackerIT {
                 true);
 
         String lostTrackerResponse = mockMvc.perform(MockMvcRequestBuilders
-                        .patch("/tracker/cat/lost-tracker")
+                        .patch("/tracker/cat/lost")
                         .content(asJsonString(lostTrackerReqModel))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

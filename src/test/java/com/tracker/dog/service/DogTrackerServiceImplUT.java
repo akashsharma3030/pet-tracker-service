@@ -42,7 +42,7 @@ class DogTrackerServiceImplTest {
 
         // Assert
         assertNotNull(response);
-        assertEquals(expectedTrackerId, response.getTrackerId());
+        assertEquals(String.valueOf(expectedTrackerId), response.getTrackerId());
         assertEquals("Dog Tracker Registered Successfully", response.getMessage());
 
         // Verify interactions

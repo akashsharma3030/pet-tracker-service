@@ -54,7 +54,7 @@ public class CatTrackerController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error",
                     content = @Content(schema = @Schema(implementation = TrackerErrorResModel.class)))
     })
-    @PatchMapping("/cat/lost-tracker")
+    @PatchMapping("/cat/lost")
     public CatLostTrackerResModel lostTracker(final @RequestBody @Valid CatLostTrackerReqModel catLostTrackerReqModel) throws CatTrackerException {
         return catTrackerService.updateLostTracker(catLostTrackerReqModel);
     }

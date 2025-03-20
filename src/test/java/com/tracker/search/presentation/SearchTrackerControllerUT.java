@@ -31,7 +31,7 @@ public class SearchTrackerControllerUT {
     @Test
     void testSearchByTrackerId() throws EntityException, NoDataFoundException, SearchTrackerException {
         TrackerModel trackerModel = new TrackerModel();
-        trackerModel.setTrackerId(1L);
+        trackerModel.setTrackerId("1");
         trackerModel.setPetType("DOG");
         trackerModel.setInZone(true);
         trackerModel.setTrackerType("SMALL");

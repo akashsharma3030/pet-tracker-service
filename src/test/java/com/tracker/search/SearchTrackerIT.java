@@ -61,7 +61,7 @@ public class SearchTrackerIT {
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
         CatTrackerModel responseModel =
                 mapper.readValue(responseString, CatTrackerModel.class);
-        assertEquals(pet.getTracker().getId(), responseModel.getTrackerId());
+        assertEquals(String.valueOf(pet.getTracker().getId()), responseModel.getTrackerId());
     }
 
 
