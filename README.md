@@ -50,7 +50,7 @@ Requirement is divided into below layers
 * Service Layer: Responsible for Domain Layer and Calling Infrastructure Layer.
 * Infrastructure Layer: Responsible for Calling Data base via Repository.
 
-![Alt text](images/class Diagram.jpg)
+![Alt text](images/Class_Diagram.jpg)
 
 ### Code Structure
 * src/main/java/com.tracker-> main package
