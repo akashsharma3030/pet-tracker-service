@@ -2,10 +2,7 @@ package com.tracker.search.service;
 
 import com.tracker.common.service.dto.PetTrackerResDto;
 import com.tracker.search.SearchTrackerException;
-import com.tracker.search.presentation.model.CatTrackerModel;
-import com.tracker.search.presentation.model.DogTrackerModel;
-import com.tracker.search.presentation.model.TrackerModel;
-import com.tracker.search.presentation.model.TrackerSearchResModel;
+import com.tracker.search.presentation.model.*;
 import com.tracker.search.service.dto.CatTrackerSearchResDto;
 import com.tracker.search.service.dto.DogTrackerSearchResDto;
 import com.tracker.search.service.dto.PetTrackerSearchResultsDto;
@@ -16,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class TrackerResModelMapper {
     private final DozerBeanMapper mapper = new DozerBeanMapper();
 
-    public TrackerSearchResModel mapTrackerResModel(PetTrackerSearchResultsDto trackerSearchResDto) throws SearchTrackerException {
-        TrackerSearchResModel trackerSearchResModel = new TrackerSearchResModel();
+    public TrackerSearchListResModel mapTrackerResModel(PetTrackerSearchResultsDto trackerSearchResDto) throws SearchTrackerException {
+        TrackerSearchListResModel trackerSearchResModel = new TrackerSearchListResModel();
         for (PetTrackerResDto trackerDto : trackerSearchResDto.getTrackerSearchModelList()) {
             TrackerModel resModel = mapTrackerResModel(trackerDto);
             if (resModel instanceof DogTrackerModel dogTrackerModel) {
@@ -39,5 +36,16 @@ public class TrackerResModelMapper {
         throw new SearchTrackerException("Invalid type of TrackerResDto:" + petTrackerResDto.getClass().getName());
     }
 
+    public TrackerSearchRespModel mapTrackerSearchRespModel(PetTrackerResDto petTrackerResDto) throws SearchTrackerException {
+        TrackerModel trackerModel =  mapTrackerResModel(petTrackerResDto);
+        TrackerSearchRespModel respModel = new TrackerSearchRespModel();
+        if(trackerModel instanceof DogTrackerModel){
+            respModel.setDogTrackerModel((DogTrackerModel) trackerModel);
+        }
+        else{
+            respModel.setCatTrackerModel((CatTrackerModel) trackerModel);
+        }
+        return respModel;
+    }
 
 }

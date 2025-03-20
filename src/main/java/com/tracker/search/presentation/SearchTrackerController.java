@@ -1,13 +1,13 @@
 package com.tracker.search.presentation;
 
-import com.tracker.cat.presentation.model.CatLostTrackerResModel;
 import com.tracker.common.presentation.model.TrackerErrorResModel;
 import com.tracker.entity.EntityException;
 import com.tracker.search.NoDataFoundException;
 import com.tracker.search.SearchTrackerException;
 import com.tracker.search.presentation.model.PetTrackerSearchReqModel;
 import com.tracker.search.presentation.model.TrackerModel;
-import com.tracker.search.presentation.model.TrackerSearchResModel;
+import com.tracker.search.presentation.model.TrackerSearchListResModel;
+import com.tracker.search.presentation.model.TrackerSearchRespModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,21 +38,21 @@ public class SearchTrackerController {
                     content = @Content(schema = @Schema(implementation = TrackerErrorResModel.class)))
     })
     @GetMapping(value = "/id", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TrackerModel searchTracker(@Valid @NotNull(message = "TrackerId cannot be null") Long trackerId) throws NoDataFoundException, EntityException, SearchTrackerException {
+    public TrackerSearchRespModel searchTracker(@Valid @NotNull(message = "TrackerId cannot be null") Long trackerId) throws NoDataFoundException, EntityException, SearchTrackerException {
         return searchTrackerService.searchByTrackerId(trackerId);
     }
 
     @Operation(summary = "Search Tracker by Pet Type and Tracker Type")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved",
-                    content = @Content(schema = @Schema(implementation = TrackerSearchResModel.class))),
+                    content = @Content(schema = @Schema(implementation = TrackerSearchListResModel.class))),
             @ApiResponse(responseCode = "404", description = "Not Data Found",
                     content = @Content(schema = @Schema(implementation = TrackerErrorResModel.class))),
             @ApiResponse(responseCode = "500", description = "Internal Server Error",
                     content = @Content(schema = @Schema(implementation = TrackerErrorResModel.class)))
     })
     @GetMapping(value = "pet-tracker-type", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TrackerSearchResModel searchByPetAndTrackerType(@Valid PetTrackerSearchReqModel reqModel) throws EntityException, NoDataFoundException, SearchTrackerException {
+    public TrackerSearchListResModel searchByPetAndTrackerType(@Valid PetTrackerSearchReqModel reqModel) throws EntityException, NoDataFoundException, SearchTrackerException {
         return searchTrackerService.searchByPetTypeTrackerType(reqModel.getPetType(), reqModel.getTrackerType());
     }
 

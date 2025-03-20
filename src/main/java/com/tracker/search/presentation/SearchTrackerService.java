@@ -6,13 +6,14 @@ import com.tracker.entity.EntityException;
 import com.tracker.search.NoDataFoundException;
 import com.tracker.search.SearchTrackerException;
 import com.tracker.search.presentation.model.TrackerModel;
-import com.tracker.search.presentation.model.TrackerSearchResModel;
+import com.tracker.search.presentation.model.TrackerSearchListResModel;
+import com.tracker.search.presentation.model.TrackerSearchRespModel;
 
 public interface SearchTrackerService {
 
-    TrackerSearchResModel searchByPetTypeTrackerType(final PetType petType, final TrackerType trackerType) throws EntityException, NoDataFoundException, SearchTrackerException;
+    TrackerSearchListResModel searchByPetTypeTrackerType(final PetType petType, final TrackerType trackerType) throws EntityException, NoDataFoundException, SearchTrackerException;
 
-    TrackerModel searchByTrackerId(final Long trackerId) throws NoDataFoundException, EntityException, SearchTrackerException;
+    TrackerSearchRespModel searchByTrackerId(final Long trackerId) throws NoDataFoundException, EntityException, SearchTrackerException;
 
     Long getPetsOutSideOfZone(final PetType petType, final TrackerType trackerType) throws EntityException;
 

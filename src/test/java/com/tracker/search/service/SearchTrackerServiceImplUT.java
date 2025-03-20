@@ -7,7 +7,8 @@ import com.tracker.entity.EntityException;
 import com.tracker.search.NoDataFoundException;
 import com.tracker.search.SearchTrackerException;
 import com.tracker.search.presentation.model.TrackerModel;
-import com.tracker.search.presentation.model.TrackerSearchResModel;
+import com.tracker.search.presentation.model.TrackerSearchListResModel;
+import com.tracker.search.presentation.model.TrackerSearchRespModel;
 import com.tracker.search.service.dto.PetTrackerSearchResultsDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,14 +39,14 @@ class SearchTrackerServiceImplUT {
         PetType petType = PetType.DOG;
         TrackerType trackerType = TrackerType.BIG;
         PetTrackerSearchResultsDto dto = new PetTrackerSearchResultsDto();
-        TrackerSearchResModel expectedModel = new TrackerSearchResModel();
+        TrackerSearchListResModel expectedModel = new TrackerSearchListResModel();
 
         when(searchTrackerDBService.searchByPetAndTrackerType(petType.name(), trackerType.name()))
                 .thenReturn(dto);
         when(trackerResModelMapper.mapTrackerResModel(dto)).thenReturn(expectedModel);
 
         // When
-        TrackerSearchResModel result = service.searchByPetTypeTrackerType(petType, trackerType);
+        TrackerSearchListResModel result = service.searchByPetTypeTrackerType(petType, trackerType);
 
         // Then
         assertSame(expectedModel, result);
@@ -85,18 +86,19 @@ class SearchTrackerServiceImplUT {
         Long trackerId = 123L;
         PetTrackerResDto dto = new PetTrackerResDto(PetType.DOG.name(), TrackerType.BIG.name(),
                 true, 123, "12345");
-        TrackerModel expectedModel = new TrackerModel();
+        TrackerSearchRespModel expectedModel = new  TrackerSearchRespModel();
+
 
         when(searchTrackerDBService.searchTrackerById(trackerId)).thenReturn(dto);
-        when(trackerResModelMapper.mapTrackerResModel(dto)).thenReturn(expectedModel);
+        when(trackerResModelMapper.mapTrackerSearchRespModel(dto)).thenReturn(expectedModel);
 
         // When
-        TrackerModel result = service.searchByTrackerId(trackerId);
+        TrackerSearchRespModel result = service.searchByTrackerId(trackerId);
 
         // Then
         assertSame(expectedModel, result);
         verify(searchTrackerDBService).searchTrackerById(trackerId);
-        verify(trackerResModelMapper).mapTrackerResModel(dto);
+        verify(trackerResModelMapper).mapTrackerSearchRespModel(dto);
     }
 
     @Test

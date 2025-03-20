@@ -5,17 +5,14 @@ import com.tracker.common.presentation.model.TrackerType;
 import com.tracker.entity.EntityException;
 import com.tracker.search.NoDataFoundException;
 import com.tracker.search.SearchTrackerException;
-import com.tracker.search.presentation.model.PetTrackerSearchReqModel;
-import com.tracker.search.presentation.model.TrackerModel;
-import com.tracker.search.presentation.model.TrackerSearchResModel;
+import com.tracker.search.presentation.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,14 +27,18 @@ public class SearchTrackerControllerUT {
 
     @Test
     void testSearchByTrackerId() throws EntityException, NoDataFoundException, SearchTrackerException {
-        TrackerModel trackerModel = new TrackerModel();
+        DogTrackerModel trackerModel = new DogTrackerModel();
         trackerModel.setTrackerId("1");
         trackerModel.setPetType("DOG");
         trackerModel.setInZone(true);
         trackerModel.setTrackerType("SMALL");
-        when(searchTrackerService.searchByTrackerId(1L)).thenReturn(trackerModel);
-        TrackerModel model = controller.searchTracker(1L);
+        TrackerSearchRespModel trackerSearchRespModel = new TrackerSearchRespModel();
+        trackerSearchRespModel.setDogTrackerModel(trackerModel);
+        when(searchTrackerService.searchByTrackerId(1L)).thenReturn(trackerSearchRespModel);
+        TrackerSearchRespModel model = controller.searchTracker(1L);
         assertNotNull(model);
+        assertNotNull(model.getDogTrackerModel());
+        assertNull(model.getCatTrackerModel());
     }
 
     @Test
@@ -45,9 +46,9 @@ public class SearchTrackerControllerUT {
         PetTrackerSearchReqModel reqModel = new PetTrackerSearchReqModel();
         reqModel.setPetType(PetType.CAT);
         reqModel.setTrackerType(TrackerType.BIG);
-        TrackerSearchResModel resModel = new TrackerSearchResModel();
+        TrackerSearchListResModel resModel = new TrackerSearchListResModel();
         when(searchTrackerService.searchByPetTypeTrackerType(PetType.CAT, TrackerType.BIG)).thenReturn(resModel);
-        TrackerSearchResModel resModelFromController = controller.searchByPetAndTrackerType(reqModel);
+        TrackerSearchListResModel resModelFromController = controller.searchByPetAndTrackerType(reqModel);
         assertNotNull(resModelFromController);
         verify(searchTrackerService).searchByPetTypeTrackerType(PetType.CAT, TrackerType.BIG);
     }
@@ -57,7 +58,7 @@ public class SearchTrackerControllerUT {
         PetTrackerSearchReqModel reqModel = new PetTrackerSearchReqModel();
         reqModel.setPetType(PetType.CAT);
         reqModel.setTrackerType(TrackerType.BIG);
-        TrackerSearchResModel resModel = new TrackerSearchResModel();
+        TrackerSearchListResModel resModel = new TrackerSearchListResModel();
         when(searchTrackerService.getPetsOutSideOfZone(PetType.CAT, TrackerType.BIG)).thenReturn(5L);
         Long count = controller.numberOfPetsOutsidePowerZone(reqModel);
         assertEquals(5L, count);

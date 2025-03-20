@@ -8,6 +8,7 @@ import com.tracker.cat.presentation.model.CatTrackerType;
 import com.tracker.entity.EntityException;
 import com.tracker.entity.Pet;
 import com.tracker.search.presentation.model.CatTrackerModel;
+import com.tracker.search.presentation.model.TrackerSearchRespModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +60,9 @@ public class SearchTrackerIT {
                         .get("/search/id?trackerId=" + pet.getTracker().getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        CatTrackerModel responseModel =
-                mapper.readValue(responseString, CatTrackerModel.class);
-        assertEquals(String.valueOf(pet.getTracker().getId()), responseModel.getTrackerId());
+        TrackerSearchRespModel responseModel =
+                mapper.readValue(responseString, TrackerSearchRespModel.class);
+        assertEquals(String.valueOf(pet.getTracker().getId()), responseModel.getCatTrackerModel().getTrackerId());
     }
 
 

@@ -8,7 +8,8 @@ import com.tracker.search.NoDataFoundException;
 import com.tracker.search.SearchTrackerException;
 import com.tracker.search.presentation.SearchTrackerService;
 import com.tracker.search.presentation.model.TrackerModel;
-import com.tracker.search.presentation.model.TrackerSearchResModel;
+import com.tracker.search.presentation.model.TrackerSearchListResModel;
+import com.tracker.search.presentation.model.TrackerSearchRespModel;
 import com.tracker.search.service.dto.PetTrackerSearchResultsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,16 +24,16 @@ public class SearchTrackerServiceImpl implements SearchTrackerService {
 
 
     @Override
-    public TrackerSearchResModel searchByPetTypeTrackerType(final PetType petType, final TrackerType trackerType) throws EntityException, NoDataFoundException, SearchTrackerException {
+    public TrackerSearchListResModel searchByPetTypeTrackerType(final PetType petType, final TrackerType trackerType) throws EntityException, NoDataFoundException, SearchTrackerException {
         PetTrackerSearchResultsDto resultsDto = searchTrackerDBService.searchByPetAndTrackerType(petType.name(),
                 trackerType.name());
         return trackerResModelMapper.mapTrackerResModel(resultsDto);
     }
 
     @Override
-    public TrackerModel searchByTrackerId(final Long trackerId) throws NoDataFoundException, EntityException, SearchTrackerException {
+    public TrackerSearchRespModel searchByTrackerId(final Long trackerId) throws NoDataFoundException, EntityException, SearchTrackerException {
         PetTrackerResDto petTrackerResDto = searchTrackerDBService.searchTrackerById(trackerId);
-        return trackerResModelMapper.mapTrackerResModel(petTrackerResDto);
+        return trackerResModelMapper.mapTrackerSearchRespModel(petTrackerResDto);
     }
 
     @Override

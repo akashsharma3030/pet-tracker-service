@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class TrackerSearchResModel {
+public class TrackerSearchListResModel {
 
     private final List<DogTrackerModel> dogTrackerModelList = new ArrayList<>();
     private final List<CatTrackerModel> catTrackerModelList = new ArrayList<>();
