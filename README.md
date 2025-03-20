@@ -23,9 +23,8 @@ From within project directory run following command  (follow as per your case):
 * Run `Main` from `PetTrackerApplication.java`.
 
 ## APIs
-For Details input and output please refer to the Swagger API
-Swagger url will be available will application will by run via
-* `PetTrackerApplication.java'
+For Details input and output please refer to the Swagger API.</br>
+Swagger url will be available when application will  run </br>
 Swagger url:[http://localhost:8080/swagger-ui/index.html]
 ## Register
 Register/dog/Tracker-> This will register the dog tracker bassed upon Owner Id,Tracker Type. Since this api will only be used for Dog
