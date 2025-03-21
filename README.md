@@ -67,8 +67,6 @@ Requirement is divided into below layers
 * Add Authorization
 * Add Https for secure connection
 * Docker for containerization
-* Add integration Test for Tracker Controller and some more test to increase coverage
-
 
 
 

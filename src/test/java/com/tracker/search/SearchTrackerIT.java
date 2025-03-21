@@ -43,16 +43,16 @@ public class SearchTrackerIT {
     private SearchTrackerRepository searchTrackerRepository;
 
     @BeforeEach
-    public void setUpData() throws EntityException {
-        if (!dataSetupFlag) {
-            dataSetupFlag = true;
-            savePetCat(2);
+        public void setUpData() throws EntityException {
+            if (!dataSetupFlag) {
+                dataSetupFlag = true;
+                savePetCat(2);
+            }
         }
-    }
 
-    private void savePetCat(int count) throws EntityException {
-        List<Pet> petList = new ArrayList<>();
-        for (int index = 1; index <= count; index++) {
+        private void savePetCat(int count) throws EntityException {
+            List<Pet> petList = new ArrayList<>();
+            for (int index = 1; index <= count; index++) {
             Pet cat = new Pet(1, CatConstants.PET_TYPE_CAT, CatTrackerType.BIG.name(), true);
             petList.add(cat);
             repository.save(cat);
