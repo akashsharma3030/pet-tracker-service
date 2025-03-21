@@ -48,8 +48,8 @@ public class SearchTrackerDBServiceImpl implements SearchTrackerDBService {
 
     @Override
     public Long getPetsOutsideOfZone(String pet, String trackerType) {
-        Optional<Long> count = repository.countByPetTypeAndTracker_TrackerTypeAndTracker_InZone(pet, trackerType, false);
-        return count.get();
+        return repository.countByPetTypeAndTracker_TrackerTypeAndTracker_InZone(pet, trackerType, false)
+                .orElse(0L);
     }
 
     private PetTrackerResDto getPetTrackerResDtoByPet(Pet pet) throws EntityException {
